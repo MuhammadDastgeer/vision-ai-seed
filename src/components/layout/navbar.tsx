@@ -1,4 +1,4 @@
-import { LogOut, Search } from "lucide-react";
+import { LogOut, Search, Settings, User as UserIcon, Command } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ModeToggle } from "@/components/theme/mode-toggle";
+import { NotificationsMenu } from "@/components/layout/notifications-menu";
 import { useAuth } from "@/context/auth-context";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -26,13 +27,17 @@ export function Navbar() {
       <SidebarTrigger />
       <Separator orientation="vertical" className="h-6" />
 
-      <div className="relative ml-2 hidden flex-1 max-w-md md:block">
+      <div className="relative ml-2 hidden max-w-md flex-1 md:block">
         <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input placeholder="Search modules, tools, docs…" className="pl-8" />
+        <Input placeholder="Search projects, workspaces, docs…" className="pl-8 pr-14" />
+        <kbd className="pointer-events-none absolute right-2 top-1/2 hidden -translate-y-1/2 items-center gap-1 rounded border bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground sm:flex">
+          <Command className="h-3 w-3" /> K
+        </kbd>
       </div>
 
       <div className="ml-auto flex items-center gap-1">
         <ModeToggle />
+        <NotificationsMenu />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
@@ -45,9 +50,16 @@ export function Navbar() {
             <DropdownMenuLabel>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">{user?.name ?? "Guest"}</span>
-                <span className="text-xs text-muted-foreground">{user?.email}</span>
+                <span className="text-xs text-muted-foreground">{user?.email ?? "guest@local"}</span>
               </div>
             </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <UserIcon className="mr-2 h-4 w-4" /> Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings className="mr-2 h-4 w-4" /> Settings
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
