@@ -15,7 +15,7 @@ import {
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { NotificationsMenu } from "@/components/layout/notifications-menu";
 import { useAuth } from "@/context/auth-context";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 export function Navbar() {
   const { user, logout } = useAuth();
@@ -54,16 +54,18 @@ export function Navbar() {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <UserIcon className="mr-2 h-4 w-4" /> Profile
+            <DropdownMenuItem asChild>
+              <Link to="/profile">
+                <UserIcon className="mr-2 h-4 w-4" /> Profile
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" /> Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              onClick={() => {
-                logout();
+              onClick={async () => {
+                await logout();
                 navigate({ to: "/login" });
               }}
             >

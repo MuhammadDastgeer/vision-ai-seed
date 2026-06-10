@@ -1,13 +1,13 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
-import { getAuthToken } from "@/lib/api/client";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/")({
-  beforeLoad: () => {
-    if (typeof window !== "undefined" && getAuthToken()) {
-      throw redirect({ to: "/app" });
-    }
+  beforeLoad: async () => {
+    if (typeof window === "undefined") return;
+    const { data } = await supabase.auth.getSession();
+    if (data.session) throw redirect({ to: "/app" });
   },
   component: Landing,
 });
@@ -28,7 +28,7 @@ function Landing() {
           <Link to="/login">Sign in</Link>
         </Button>
         <Button asChild size="lg" variant="outline">
-          <Link to="/app">Enter Studio</Link>
+          <Link to="/signup">Create account</Link>
         </Button>
       </div>
     </div>
