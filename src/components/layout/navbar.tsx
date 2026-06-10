@@ -15,7 +15,7 @@ import {
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { NotificationsMenu } from "@/components/layout/notifications-menu";
 import { useAuth } from "@/context/auth-context";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 export function Navbar() {
   const { user, logout } = useAuth();
