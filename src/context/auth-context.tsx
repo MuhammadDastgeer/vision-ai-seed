@@ -80,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (email: string, password: string, displayName: string) => {
     const redirectUrl = `${window.location.origin}/app`;
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -89,6 +89,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     });
     if (error) throw error;
+    // If email confirmation is required, no session is returned.
+    if (!data.session) {
+      throw new Error("Check your email to confirm your account before signing in.");
+    }
   };
 
   const login = async (email: string, password: string) => {
