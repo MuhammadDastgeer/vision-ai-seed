@@ -1,13 +1,16 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { Navbar } from "@/components/layout/navbar";
-import { getAuthToken } from "@/lib/api/client";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/context/auth-context";
 
 export const Route = createFileRoute("/_protected")({
-  beforeLoad: () => {
+  beforeLoad: async () => {
     if (typeof window === "undefined") return;
-    if (!getAuthToken()) {
+    const { data } = await supabase.auth.getSession();
+    if (!data.session) {
       throw redirect({ to: "/login" });
     }
   },
@@ -15,6 +18,15 @@ export const Route = createFileRoute("/_protected")({
 });
 
 function ProtectedLayout() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      navigate({ to: "/login" });
+    }
+  }, [isAuthenticated, isLoading, navigate]);
+
   return (
     <SidebarProvider>
       <AppSidebar />
