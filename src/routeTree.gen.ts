@@ -15,6 +15,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProtectedSettingsRouteImport } from './routes/_protected.settings'
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
@@ -48,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtectedSettingsRoute = ProtectedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedProfileRoute = ProtectedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/profile': typeof ProtectedProfileRoute
+  '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app/': typeof ProtectedAppIndexRoute
 }
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/profile': typeof ProtectedProfileRoute
+  '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app': typeof ProtectedAppIndexRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/_protected/profile': typeof ProtectedProfileRoute
+  '/_protected/settings': typeof ProtectedSettingsRoute
   '/_protected/app/$module': typeof ProtectedAppModuleRoute
   '/_protected/app/': typeof ProtectedAppIndexRoute
 }
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/profile'
+    | '/settings'
     | '/app/$module'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/profile'
+    | '/settings'
     | '/app/$module'
     | '/app'
   id:
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/_protected/profile'
+    | '/_protected/settings'
     | '/_protected/app/$module'
     | '/_protected/app/'
   fileRoutesById: FileRoutesById
@@ -183,6 +195,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/settings': {
+      id: '/_protected/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ProtectedSettingsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/profile': {
       id: '/_protected/profile'
       path: '/profile'
@@ -209,12 +228,14 @@ declare module '@tanstack/react-router' {
 
 interface ProtectedRouteChildren {
   ProtectedProfileRoute: typeof ProtectedProfileRoute
+  ProtectedSettingsRoute: typeof ProtectedSettingsRoute
   ProtectedAppModuleRoute: typeof ProtectedAppModuleRoute
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedProfileRoute: ProtectedProfileRoute,
+  ProtectedSettingsRoute: ProtectedSettingsRoute,
   ProtectedAppModuleRoute: ProtectedAppModuleRoute,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
@@ -234,3 +255,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
