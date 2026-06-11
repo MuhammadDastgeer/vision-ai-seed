@@ -72,7 +72,7 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        </SidebarGroup>
+
 
         <SidebarGroup>
           <SidebarGroupLabel>Account</SidebarGroupLabel>
