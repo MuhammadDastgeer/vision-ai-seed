@@ -142,5 +142,32 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility aurora-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, oklch(0.55 0.22 280 / 0.35), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 20%, oklch(0.75 0.18 160 / 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 90%, oklch(0.55 0.22 280 / 0.25), transparent 60%),
+    linear-gradient(180deg, oklch(0.12 0.04 270), oklch(0.10 0.03 265));
+}
+
+@utility text-aurora {
+  background: linear-gradient(135deg, oklch(0.85 0.18 160) 0%, oklch(0.78 0.18 200) 50%, oklch(0.72 0.22 290) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass-card {
+  background: linear-gradient(135deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.02));
+  border: 1px solid oklch(1 0 0 / 0.10);
+  backdrop-filter: blur(12px);
 }
