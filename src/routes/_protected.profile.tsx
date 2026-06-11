@@ -87,7 +87,27 @@ function ProfilePage() {
             </div>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-6">
+          <div className="grid gap-3 rounded-lg border bg-muted/30 p-4 sm:grid-cols-2">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">First signed up</p>
+              <p className="mt-1 text-sm font-medium">
+                {profile?.created_at
+                  ? new Date(profile.created_at).toLocaleString()
+                  : "—"}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wide text-muted-foreground">Last sign-in</p>
+              <p className="mt-1 text-sm font-medium">
+                {session?.user.last_sign_in_at
+                  ? new Date(session.user.last_sign_in_at).toLocaleString()
+                  : "—"}
+              </p>
+            </div>
+          </div>
+
+
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="display_name">Display name</Label>
