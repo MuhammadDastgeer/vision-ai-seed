@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Settings, User } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
