@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Sparkles, Settings, User } from "lucide-react";
+import { Sparkles, Settings, User, FileText } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -73,6 +73,26 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Tools</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/app/ats-resume")}
+                  tooltip="ATS Resume Generator"
+                >
+                  <Link to="/app/ats-resume">
+                    <FileText />
+                    <span>ATS Resume</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
         <SidebarGroup>
           <SidebarGroupLabel>Account</SidebarGroupLabel>
