@@ -18,7 +18,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProtectedSettingsRouteImport } from './routes/_protected.settings'
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
+import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
+import { Route as ProtectedAppCoreToolsIndexRouteImport } from './routes/_protected.app.core-tools.index'
+import { Route as ProtectedAppCoreToolsToolRouteImport } from './routes/_protected.app.core-tools.$tool'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -64,11 +67,28 @@ const ProtectedAppIndexRoute = ProtectedAppIndexRouteImport.update({
   path: '/app/',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppCoreToolsRoute = ProtectedAppCoreToolsRouteImport.update({
+  id: '/app/core-tools',
+  path: '/app/core-tools',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedAppModuleRoute = ProtectedAppModuleRouteImport.update({
   id: '/app/$module',
   path: '/app/$module',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppCoreToolsIndexRoute =
+  ProtectedAppCoreToolsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedAppCoreToolsRoute,
+  } as any)
+const ProtectedAppCoreToolsToolRoute =
+  ProtectedAppCoreToolsToolRouteImport.update({
+    id: '/$tool',
+    path: '/$tool',
+    getParentRoute: () => ProtectedAppCoreToolsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -79,7 +99,10 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProtectedProfileRoute
   '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
+  '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/app/': typeof ProtectedAppIndexRoute
+  '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -91,6 +114,8 @@ export interface FileRoutesByTo {
   '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app': typeof ProtectedAppIndexRoute
+  '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -103,7 +128,10 @@ export interface FileRoutesById {
   '/_protected/profile': typeof ProtectedProfileRoute
   '/_protected/settings': typeof ProtectedSettingsRoute
   '/_protected/app/$module': typeof ProtectedAppModuleRoute
+  '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/_protected/app/': typeof ProtectedAppIndexRoute
+  '/_protected/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/_protected/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -116,7 +144,10 @@ export interface FileRouteTypes {
     | '/profile'
     | '/settings'
     | '/app/$module'
+    | '/app/core-tools'
     | '/app/'
+    | '/app/core-tools/$tool'
+    | '/app/core-tools/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -128,6 +159,8 @@ export interface FileRouteTypes {
     | '/settings'
     | '/app/$module'
     | '/app'
+    | '/app/core-tools/$tool'
+    | '/app/core-tools'
   id:
     | '__root__'
     | '/'
@@ -139,7 +172,10 @@ export interface FileRouteTypes {
     | '/_protected/profile'
     | '/_protected/settings'
     | '/_protected/app/$module'
+    | '/_protected/app/core-tools'
     | '/_protected/app/'
+    | '/_protected/app/core-tools/$tool'
+    | '/_protected/app/core-tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -216,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/core-tools': {
+      id: '/_protected/app/core-tools'
+      path: '/app/core-tools'
+      fullPath: '/app/core-tools'
+      preLoaderRoute: typeof ProtectedAppCoreToolsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/$module': {
       id: '/_protected/app/$module'
       path: '/app/$module'
@@ -223,13 +266,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppModuleRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/core-tools/': {
+      id: '/_protected/app/core-tools/'
+      path: '/'
+      fullPath: '/app/core-tools/'
+      preLoaderRoute: typeof ProtectedAppCoreToolsIndexRouteImport
+      parentRoute: typeof ProtectedAppCoreToolsRoute
+    }
+    '/_protected/app/core-tools/$tool': {
+      id: '/_protected/app/core-tools/$tool'
+      path: '/$tool'
+      fullPath: '/app/core-tools/$tool'
+      preLoaderRoute: typeof ProtectedAppCoreToolsToolRouteImport
+      parentRoute: typeof ProtectedAppCoreToolsRoute
+    }
   }
 }
+
+interface ProtectedAppCoreToolsRouteChildren {
+  ProtectedAppCoreToolsToolRoute: typeof ProtectedAppCoreToolsToolRoute
+  ProtectedAppCoreToolsIndexRoute: typeof ProtectedAppCoreToolsIndexRoute
+}
+
+const ProtectedAppCoreToolsRouteChildren: ProtectedAppCoreToolsRouteChildren = {
+  ProtectedAppCoreToolsToolRoute: ProtectedAppCoreToolsToolRoute,
+  ProtectedAppCoreToolsIndexRoute: ProtectedAppCoreToolsIndexRoute,
+}
+
+const ProtectedAppCoreToolsRouteWithChildren =
+  ProtectedAppCoreToolsRoute._addFileChildren(
+    ProtectedAppCoreToolsRouteChildren,
+  )
 
 interface ProtectedRouteChildren {
   ProtectedProfileRoute: typeof ProtectedProfileRoute
   ProtectedSettingsRoute: typeof ProtectedSettingsRoute
   ProtectedAppModuleRoute: typeof ProtectedAppModuleRoute
+  ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
 
@@ -237,6 +310,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedProfileRoute: ProtectedProfileRoute,
   ProtectedSettingsRoute: ProtectedSettingsRoute,
   ProtectedAppModuleRoute: ProtectedAppModuleRoute,
+  ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
 
