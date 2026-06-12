@@ -19,6 +19,7 @@ import { Route as ProtectedSettingsRouteImport } from './routes/_protected.setti
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
 import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
+import { Route as ProtectedAppAtsResumeRouteImport } from './routes/_protected.app.ats-resume'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
 import { Route as ProtectedAppCoreToolsIndexRouteImport } from './routes/_protected.app.core-tools.index'
 import { Route as ProtectedAppCoreToolsToolRouteImport } from './routes/_protected.app.core-tools.$tool'
@@ -72,6 +73,11 @@ const ProtectedAppCoreToolsRoute = ProtectedAppCoreToolsRouteImport.update({
   path: '/app/core-tools',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppAtsResumeRoute = ProtectedAppAtsResumeRouteImport.update({
+  id: '/app/ats-resume',
+  path: '/app/ats-resume',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedAppModuleRoute = ProtectedAppModuleRouteImport.update({
   id: '/app/$module',
   path: '/app/$module',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProtectedProfileRoute
   '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
+  '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/app/': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
@@ -113,6 +120,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProtectedProfileRoute
   '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
+  '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/_protected/profile': typeof ProtectedProfileRoute
   '/_protected/settings': typeof ProtectedSettingsRoute
   '/_protected/app/$module': typeof ProtectedAppModuleRoute
+  '/_protected/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/_protected/app/': typeof ProtectedAppIndexRoute
   '/_protected/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/settings'
     | '/app/$module'
+    | '/app/ats-resume'
     | '/app/core-tools'
     | '/app/'
     | '/app/core-tools/$tool'
@@ -158,6 +168,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/settings'
     | '/app/$module'
+    | '/app/ats-resume'
     | '/app'
     | '/app/core-tools/$tool'
     | '/app/core-tools'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/_protected/profile'
     | '/_protected/settings'
     | '/_protected/app/$module'
+    | '/_protected/app/ats-resume'
     | '/_protected/app/core-tools'
     | '/_protected/app/'
     | '/_protected/app/core-tools/$tool'
@@ -259,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppCoreToolsRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/ats-resume': {
+      id: '/_protected/app/ats-resume'
+      path: '/app/ats-resume'
+      fullPath: '/app/ats-resume'
+      preLoaderRoute: typeof ProtectedAppAtsResumeRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/$module': {
       id: '/_protected/app/$module'
       path: '/app/$module'
@@ -302,6 +321,7 @@ interface ProtectedRouteChildren {
   ProtectedProfileRoute: typeof ProtectedProfileRoute
   ProtectedSettingsRoute: typeof ProtectedSettingsRoute
   ProtectedAppModuleRoute: typeof ProtectedAppModuleRoute
+  ProtectedAppAtsResumeRoute: typeof ProtectedAppAtsResumeRoute
   ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
@@ -310,6 +330,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedProfileRoute: ProtectedProfileRoute,
   ProtectedSettingsRoute: ProtectedSettingsRoute,
   ProtectedAppModuleRoute: ProtectedAppModuleRoute,
+  ProtectedAppAtsResumeRoute: ProtectedAppAtsResumeRoute,
   ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
@@ -329,13 +350,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
