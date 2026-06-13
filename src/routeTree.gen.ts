@@ -18,6 +18,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProtectedSettingsRouteImport } from './routes/_protected.settings'
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
+import { Route as ProtectedAppPromptBuilderRouteImport } from './routes/_protected.app.prompt-builder'
 import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
 import { Route as ProtectedAppAtsResumeRouteImport } from './routes/_protected.app.ats-resume'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
@@ -68,6 +69,12 @@ const ProtectedAppIndexRoute = ProtectedAppIndexRouteImport.update({
   path: '/app/',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppPromptBuilderRoute =
+  ProtectedAppPromptBuilderRouteImport.update({
+    id: '/app/prompt-builder',
+    path: '/app/prompt-builder',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedAppCoreToolsRoute = ProtectedAppCoreToolsRouteImport.update({
   id: '/app/core-tools',
   path: '/app/core-tools',
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
+  '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app/': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
   '/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
@@ -121,6 +129,7 @@ export interface FileRoutesByTo {
   '/settings': typeof ProtectedSettingsRoute
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
+  '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
@@ -138,6 +147,7 @@ export interface FileRoutesById {
   '/_protected/app/$module': typeof ProtectedAppModuleRoute
   '/_protected/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
+  '/_protected/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/_protected/app/': typeof ProtectedAppIndexRoute
   '/_protected/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
   '/_protected/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/app/$module'
     | '/app/ats-resume'
     | '/app/core-tools'
+    | '/app/prompt-builder'
     | '/app/'
     | '/app/core-tools/$tool'
     | '/app/core-tools/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/app/$module'
     | '/app/ats-resume'
+    | '/app/prompt-builder'
     | '/app'
     | '/app/core-tools/$tool'
     | '/app/core-tools'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
     | '/_protected/app/$module'
     | '/_protected/app/ats-resume'
     | '/_protected/app/core-tools'
+    | '/_protected/app/prompt-builder'
     | '/_protected/app/'
     | '/_protected/app/core-tools/$tool'
     | '/_protected/app/core-tools/'
@@ -264,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/prompt-builder': {
+      id: '/_protected/app/prompt-builder'
+      path: '/app/prompt-builder'
+      fullPath: '/app/prompt-builder'
+      preLoaderRoute: typeof ProtectedAppPromptBuilderRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/core-tools': {
       id: '/_protected/app/core-tools'
       path: '/app/core-tools'
@@ -323,6 +343,7 @@ interface ProtectedRouteChildren {
   ProtectedAppModuleRoute: typeof ProtectedAppModuleRoute
   ProtectedAppAtsResumeRoute: typeof ProtectedAppAtsResumeRoute
   ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
+  ProtectedAppPromptBuilderRoute: typeof ProtectedAppPromptBuilderRoute
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
 
@@ -332,6 +353,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAppModuleRoute: ProtectedAppModuleRoute,
   ProtectedAppAtsResumeRoute: ProtectedAppAtsResumeRoute,
   ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
+  ProtectedAppPromptBuilderRoute: ProtectedAppPromptBuilderRoute,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
 
