@@ -19,10 +19,16 @@ import { Route as ProtectedSettingsRouteImport } from './routes/_protected.setti
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
 import { Route as ProtectedAppPromptBuilderRouteImport } from './routes/_protected.app.prompt-builder'
+import { Route as ProtectedAppDataScienceRouteImport } from './routes/_protected.app.data-science'
 import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
 import { Route as ProtectedAppAtsResumeRouteImport } from './routes/_protected.app.ats-resume'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
+import { Route as ProtectedAppDataScienceIndexRouteImport } from './routes/_protected.app.data-science.index'
 import { Route as ProtectedAppCoreToolsIndexRouteImport } from './routes/_protected.app.core-tools.index'
+import { Route as ProtectedAppDataScienceVisualizationRouteImport } from './routes/_protected.app.data-science.visualization'
+import { Route as ProtectedAppDataScienceSqlGeneratorRouteImport } from './routes/_protected.app.data-science.sql-generator'
+import { Route as ProtectedAppDataScienceEdaRouteImport } from './routes/_protected.app.data-science.eda'
+import { Route as ProtectedAppDataScienceDataCleaningRouteImport } from './routes/_protected.app.data-science.data-cleaning'
 import { Route as ProtectedAppCoreToolsToolRouteImport } from './routes/_protected.app.core-tools.$tool'
 
 const SignupRoute = SignupRouteImport.update({
@@ -75,6 +81,11 @@ const ProtectedAppPromptBuilderRoute =
     path: '/app/prompt-builder',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedAppDataScienceRoute = ProtectedAppDataScienceRouteImport.update({
+  id: '/app/data-science',
+  path: '/app/data-science',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedAppCoreToolsRoute = ProtectedAppCoreToolsRouteImport.update({
   id: '/app/core-tools',
   path: '/app/core-tools',
@@ -90,11 +101,41 @@ const ProtectedAppModuleRoute = ProtectedAppModuleRouteImport.update({
   path: '/app/$module',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppDataScienceIndexRoute =
+  ProtectedAppDataScienceIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedAppDataScienceRoute,
+  } as any)
 const ProtectedAppCoreToolsIndexRoute =
   ProtectedAppCoreToolsIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => ProtectedAppCoreToolsRoute,
+  } as any)
+const ProtectedAppDataScienceVisualizationRoute =
+  ProtectedAppDataScienceVisualizationRouteImport.update({
+    id: '/visualization',
+    path: '/visualization',
+    getParentRoute: () => ProtectedAppDataScienceRoute,
+  } as any)
+const ProtectedAppDataScienceSqlGeneratorRoute =
+  ProtectedAppDataScienceSqlGeneratorRouteImport.update({
+    id: '/sql-generator',
+    path: '/sql-generator',
+    getParentRoute: () => ProtectedAppDataScienceRoute,
+  } as any)
+const ProtectedAppDataScienceEdaRoute =
+  ProtectedAppDataScienceEdaRouteImport.update({
+    id: '/eda',
+    path: '/eda',
+    getParentRoute: () => ProtectedAppDataScienceRoute,
+  } as any)
+const ProtectedAppDataScienceDataCleaningRoute =
+  ProtectedAppDataScienceDataCleaningRouteImport.update({
+    id: '/data-cleaning',
+    path: '/data-cleaning',
+    getParentRoute: () => ProtectedAppDataScienceRoute,
   } as any)
 const ProtectedAppCoreToolsToolRoute =
   ProtectedAppCoreToolsToolRouteImport.update({
@@ -114,10 +155,16 @@ export interface FileRoutesByFullPath {
   '/app/$module': typeof ProtectedAppModuleRoute
   '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
+  '/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
   '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app/': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/app/data-science/data-cleaning': typeof ProtectedAppDataScienceDataCleaningRoute
+  '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
+  '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
+  '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
   '/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
+  '/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -132,7 +179,12 @@ export interface FileRoutesByTo {
   '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/app/data-science/data-cleaning': typeof ProtectedAppDataScienceDataCleaningRoute
+  '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
+  '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
+  '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
+  '/app/data-science': typeof ProtectedAppDataScienceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -147,10 +199,16 @@ export interface FileRoutesById {
   '/_protected/app/$module': typeof ProtectedAppModuleRoute
   '/_protected/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
+  '/_protected/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
   '/_protected/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/_protected/app/': typeof ProtectedAppIndexRoute
   '/_protected/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
+  '/_protected/app/data-science/data-cleaning': typeof ProtectedAppDataScienceDataCleaningRoute
+  '/_protected/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
+  '/_protected/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
+  '/_protected/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
   '/_protected/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
+  '/_protected/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -165,10 +223,16 @@ export interface FileRouteTypes {
     | '/app/$module'
     | '/app/ats-resume'
     | '/app/core-tools'
+    | '/app/data-science'
     | '/app/prompt-builder'
     | '/app/'
     | '/app/core-tools/$tool'
+    | '/app/data-science/data-cleaning'
+    | '/app/data-science/eda'
+    | '/app/data-science/sql-generator'
+    | '/app/data-science/visualization'
     | '/app/core-tools/'
+    | '/app/data-science/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -183,7 +247,12 @@ export interface FileRouteTypes {
     | '/app/prompt-builder'
     | '/app'
     | '/app/core-tools/$tool'
+    | '/app/data-science/data-cleaning'
+    | '/app/data-science/eda'
+    | '/app/data-science/sql-generator'
+    | '/app/data-science/visualization'
     | '/app/core-tools'
+    | '/app/data-science'
   id:
     | '__root__'
     | '/'
@@ -197,10 +266,16 @@ export interface FileRouteTypes {
     | '/_protected/app/$module'
     | '/_protected/app/ats-resume'
     | '/_protected/app/core-tools'
+    | '/_protected/app/data-science'
     | '/_protected/app/prompt-builder'
     | '/_protected/app/'
     | '/_protected/app/core-tools/$tool'
+    | '/_protected/app/data-science/data-cleaning'
+    | '/_protected/app/data-science/eda'
+    | '/_protected/app/data-science/sql-generator'
+    | '/_protected/app/data-science/visualization'
     | '/_protected/app/core-tools/'
+    | '/_protected/app/data-science/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -284,6 +359,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppPromptBuilderRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/data-science': {
+      id: '/_protected/app/data-science'
+      path: '/app/data-science'
+      fullPath: '/app/data-science'
+      preLoaderRoute: typeof ProtectedAppDataScienceRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/core-tools': {
       id: '/_protected/app/core-tools'
       path: '/app/core-tools'
@@ -305,12 +387,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppModuleRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/data-science/': {
+      id: '/_protected/app/data-science/'
+      path: '/'
+      fullPath: '/app/data-science/'
+      preLoaderRoute: typeof ProtectedAppDataScienceIndexRouteImport
+      parentRoute: typeof ProtectedAppDataScienceRoute
+    }
     '/_protected/app/core-tools/': {
       id: '/_protected/app/core-tools/'
       path: '/'
       fullPath: '/app/core-tools/'
       preLoaderRoute: typeof ProtectedAppCoreToolsIndexRouteImport
       parentRoute: typeof ProtectedAppCoreToolsRoute
+    }
+    '/_protected/app/data-science/visualization': {
+      id: '/_protected/app/data-science/visualization'
+      path: '/visualization'
+      fullPath: '/app/data-science/visualization'
+      preLoaderRoute: typeof ProtectedAppDataScienceVisualizationRouteImport
+      parentRoute: typeof ProtectedAppDataScienceRoute
+    }
+    '/_protected/app/data-science/sql-generator': {
+      id: '/_protected/app/data-science/sql-generator'
+      path: '/sql-generator'
+      fullPath: '/app/data-science/sql-generator'
+      preLoaderRoute: typeof ProtectedAppDataScienceSqlGeneratorRouteImport
+      parentRoute: typeof ProtectedAppDataScienceRoute
+    }
+    '/_protected/app/data-science/eda': {
+      id: '/_protected/app/data-science/eda'
+      path: '/eda'
+      fullPath: '/app/data-science/eda'
+      preLoaderRoute: typeof ProtectedAppDataScienceEdaRouteImport
+      parentRoute: typeof ProtectedAppDataScienceRoute
+    }
+    '/_protected/app/data-science/data-cleaning': {
+      id: '/_protected/app/data-science/data-cleaning'
+      path: '/data-cleaning'
+      fullPath: '/app/data-science/data-cleaning'
+      preLoaderRoute: typeof ProtectedAppDataScienceDataCleaningRouteImport
+      parentRoute: typeof ProtectedAppDataScienceRoute
     }
     '/_protected/app/core-tools/$tool': {
       id: '/_protected/app/core-tools/$tool'
@@ -337,12 +454,38 @@ const ProtectedAppCoreToolsRouteWithChildren =
     ProtectedAppCoreToolsRouteChildren,
   )
 
+interface ProtectedAppDataScienceRouteChildren {
+  ProtectedAppDataScienceDataCleaningRoute: typeof ProtectedAppDataScienceDataCleaningRoute
+  ProtectedAppDataScienceEdaRoute: typeof ProtectedAppDataScienceEdaRoute
+  ProtectedAppDataScienceSqlGeneratorRoute: typeof ProtectedAppDataScienceSqlGeneratorRoute
+  ProtectedAppDataScienceVisualizationRoute: typeof ProtectedAppDataScienceVisualizationRoute
+  ProtectedAppDataScienceIndexRoute: typeof ProtectedAppDataScienceIndexRoute
+}
+
+const ProtectedAppDataScienceRouteChildren: ProtectedAppDataScienceRouteChildren =
+  {
+    ProtectedAppDataScienceDataCleaningRoute:
+      ProtectedAppDataScienceDataCleaningRoute,
+    ProtectedAppDataScienceEdaRoute: ProtectedAppDataScienceEdaRoute,
+    ProtectedAppDataScienceSqlGeneratorRoute:
+      ProtectedAppDataScienceSqlGeneratorRoute,
+    ProtectedAppDataScienceVisualizationRoute:
+      ProtectedAppDataScienceVisualizationRoute,
+    ProtectedAppDataScienceIndexRoute: ProtectedAppDataScienceIndexRoute,
+  }
+
+const ProtectedAppDataScienceRouteWithChildren =
+  ProtectedAppDataScienceRoute._addFileChildren(
+    ProtectedAppDataScienceRouteChildren,
+  )
+
 interface ProtectedRouteChildren {
   ProtectedProfileRoute: typeof ProtectedProfileRoute
   ProtectedSettingsRoute: typeof ProtectedSettingsRoute
   ProtectedAppModuleRoute: typeof ProtectedAppModuleRoute
   ProtectedAppAtsResumeRoute: typeof ProtectedAppAtsResumeRoute
   ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
+  ProtectedAppDataScienceRoute: typeof ProtectedAppDataScienceRouteWithChildren
   ProtectedAppPromptBuilderRoute: typeof ProtectedAppPromptBuilderRoute
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
@@ -353,6 +496,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAppModuleRoute: ProtectedAppModuleRoute,
   ProtectedAppAtsResumeRoute: ProtectedAppAtsResumeRoute,
   ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
+  ProtectedAppDataScienceRoute: ProtectedAppDataScienceRouteWithChildren,
   ProtectedAppPromptBuilderRoute: ProtectedAppPromptBuilderRoute,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
