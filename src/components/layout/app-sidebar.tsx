@@ -90,6 +90,18 @@ export function AppSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/app/prompt-builder")}
+                  tooltip="Prompt Builder"
+                >
+                  <Link to="/app/prompt-builder">
+                    <Wand2 />
+                    <span>Prompt Builder</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
