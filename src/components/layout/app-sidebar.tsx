@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Sparkles, Settings, User, FileText } from "lucide-react";
+import { Sparkles, Settings, User, FileText, Wand2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -87,6 +87,18 @@ export function AppSidebar() {
                   <Link to="/app/ats-resume">
                     <FileText />
                     <span>ATS Resume</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive("/app/prompt-builder")}
+                  tooltip="Prompt Builder"
+                >
+                  <Link to="/app/prompt-builder">
+                    <Wand2 />
+                    <span>Prompt Builder</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
