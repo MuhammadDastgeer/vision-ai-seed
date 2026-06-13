@@ -1,6 +1,5 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { Broom, BarChart3, LineChart, Database } from "lucide-react";
-import { Sparkles } from "lucide-react";
+import { Brush, BarChart3, LineChart, Database, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/layout/page-header";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/_protected/app/data-science")({
 
 const TABS = [
   { to: "/app/data-science", label: "Overview", icon: Sparkles, exact: true },
-  { to: "/app/data-science/data-cleaning", label: "Data Cleaning", icon: Broom },
+  { to: "/app/data-science/data-cleaning", label: "Data Cleaning", icon: Brush },
   { to: "/app/data-science/eda", label: "EDA Analyzer", icon: BarChart3 },
   { to: "/app/data-science/visualization", label: "Visualization", icon: LineChart },
   { to: "/app/data-science/sql-generator", label: "SQL Generator", icon: Database },

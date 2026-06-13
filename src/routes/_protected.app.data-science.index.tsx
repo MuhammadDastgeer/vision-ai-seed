@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Broom, BarChart3, LineChart, Database, ArrowRight } from "lucide-react";
+import { Brush, BarChart3, LineChart, Database, ArrowRight } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -18,7 +18,7 @@ const PAGES = [
     to: "/app/data-science/data-cleaning",
     title: "Data Cleaning",
     tagline: "Plan + Python code to clean any dataset.",
-    icon: Broom,
+    icon: Brush,
   },
   {
     to: "/app/data-science/eda",
