@@ -20,17 +20,23 @@ import { Route as ProtectedProfileRouteImport } from './routes/_protected.profil
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
 import { Route as ProtectedAppPromptBuilderRouteImport } from './routes/_protected.app.prompt-builder'
 import { Route as ProtectedAppMachineLearningRouteImport } from './routes/_protected.app.machine-learning'
+import { Route as ProtectedAppDeepLearningRouteImport } from './routes/_protected.app.deep-learning'
 import { Route as ProtectedAppDataScienceRouteImport } from './routes/_protected.app.data-science'
 import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
 import { Route as ProtectedAppAtsResumeRouteImport } from './routes/_protected.app.ats-resume'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
 import { Route as ProtectedAppMachineLearningIndexRouteImport } from './routes/_protected.app.machine-learning.index'
+import { Route as ProtectedAppDeepLearningIndexRouteImport } from './routes/_protected.app.deep-learning.index'
 import { Route as ProtectedAppDataScienceIndexRouteImport } from './routes/_protected.app.data-science.index'
 import { Route as ProtectedAppCoreToolsIndexRouteImport } from './routes/_protected.app.core-tools.index'
 import { Route as ProtectedAppMachineLearningModelEvaluatorRouteImport } from './routes/_protected.app.machine-learning.model-evaluator'
 import { Route as ProtectedAppMachineLearningMlBuilderRouteImport } from './routes/_protected.app.machine-learning.ml-builder'
 import { Route as ProtectedAppMachineLearningFeatureEngineeringRouteImport } from './routes/_protected.app.machine-learning.feature-engineering'
 import { Route as ProtectedAppMachineLearningAutomlRouteImport } from './routes/_protected.app.machine-learning.automl'
+import { Route as ProtectedAppDeepLearningTransformerBuilderRouteImport } from './routes/_protected.app.deep-learning.transformer-builder'
+import { Route as ProtectedAppDeepLearningLstmBuilderRouteImport } from './routes/_protected.app.deep-learning.lstm-builder'
+import { Route as ProtectedAppDeepLearningComputerVisionRouteImport } from './routes/_protected.app.deep-learning.computer-vision'
+import { Route as ProtectedAppDeepLearningCnnBuilderRouteImport } from './routes/_protected.app.deep-learning.cnn-builder'
 import { Route as ProtectedAppDataScienceVisualizationRouteImport } from './routes/_protected.app.data-science.visualization'
 import { Route as ProtectedAppDataScienceSqlGeneratorRouteImport } from './routes/_protected.app.data-science.sql-generator'
 import { Route as ProtectedAppDataScienceEdaRouteImport } from './routes/_protected.app.data-science.eda'
@@ -93,6 +99,12 @@ const ProtectedAppMachineLearningRoute =
     path: '/app/machine-learning',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedAppDeepLearningRoute =
+  ProtectedAppDeepLearningRouteImport.update({
+    id: '/app/deep-learning',
+    path: '/app/deep-learning',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedAppDataScienceRoute = ProtectedAppDataScienceRouteImport.update({
   id: '/app/data-science',
   path: '/app/data-science',
@@ -118,6 +130,12 @@ const ProtectedAppMachineLearningIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
+const ProtectedAppDeepLearningIndexRoute =
+  ProtectedAppDeepLearningIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedAppDeepLearningRoute,
   } as any)
 const ProtectedAppDataScienceIndexRoute =
   ProtectedAppDataScienceIndexRouteImport.update({
@@ -154,6 +172,30 @@ const ProtectedAppMachineLearningAutomlRoute =
     id: '/automl',
     path: '/automl',
     getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
+const ProtectedAppDeepLearningTransformerBuilderRoute =
+  ProtectedAppDeepLearningTransformerBuilderRouteImport.update({
+    id: '/transformer-builder',
+    path: '/transformer-builder',
+    getParentRoute: () => ProtectedAppDeepLearningRoute,
+  } as any)
+const ProtectedAppDeepLearningLstmBuilderRoute =
+  ProtectedAppDeepLearningLstmBuilderRouteImport.update({
+    id: '/lstm-builder',
+    path: '/lstm-builder',
+    getParentRoute: () => ProtectedAppDeepLearningRoute,
+  } as any)
+const ProtectedAppDeepLearningComputerVisionRoute =
+  ProtectedAppDeepLearningComputerVisionRouteImport.update({
+    id: '/computer-vision',
+    path: '/computer-vision',
+    getParentRoute: () => ProtectedAppDeepLearningRoute,
+  } as any)
+const ProtectedAppDeepLearningCnnBuilderRoute =
+  ProtectedAppDeepLearningCnnBuilderRouteImport.update({
+    id: '/cnn-builder',
+    path: '/cnn-builder',
+    getParentRoute: () => ProtectedAppDeepLearningRoute,
   } as any)
 const ProtectedAppDataScienceVisualizationRoute =
   ProtectedAppDataScienceVisualizationRouteImport.update({
@@ -198,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
+  '/app/deep-learning': typeof ProtectedAppDeepLearningRouteWithChildren
   '/app/machine-learning': typeof ProtectedAppMachineLearningRouteWithChildren
   '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app/': typeof ProtectedAppIndexRoute
@@ -206,12 +249,17 @@ export interface FileRoutesByFullPath {
   '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/app/deep-learning/cnn-builder': typeof ProtectedAppDeepLearningCnnBuilderRoute
+  '/app/deep-learning/computer-vision': typeof ProtectedAppDeepLearningComputerVisionRoute
+  '/app/deep-learning/lstm-builder': typeof ProtectedAppDeepLearningLstmBuilderRoute
+  '/app/deep-learning/transformer-builder': typeof ProtectedAppDeepLearningTransformerBuilderRoute
   '/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
   '/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
   '/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
   '/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
   '/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
+  '/app/deep-learning/': typeof ProtectedAppDeepLearningIndexRoute
   '/app/machine-learning/': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRoutesByTo {
@@ -231,12 +279,17 @@ export interface FileRoutesByTo {
   '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/app/deep-learning/cnn-builder': typeof ProtectedAppDeepLearningCnnBuilderRoute
+  '/app/deep-learning/computer-vision': typeof ProtectedAppDeepLearningComputerVisionRoute
+  '/app/deep-learning/lstm-builder': typeof ProtectedAppDeepLearningLstmBuilderRoute
+  '/app/deep-learning/transformer-builder': typeof ProtectedAppDeepLearningTransformerBuilderRoute
   '/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
   '/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
   '/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
   '/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
   '/app/data-science': typeof ProtectedAppDataScienceIndexRoute
+  '/app/deep-learning': typeof ProtectedAppDeepLearningIndexRoute
   '/app/machine-learning': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRoutesById {
@@ -253,6 +306,7 @@ export interface FileRoutesById {
   '/_protected/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/_protected/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
+  '/_protected/app/deep-learning': typeof ProtectedAppDeepLearningRouteWithChildren
   '/_protected/app/machine-learning': typeof ProtectedAppMachineLearningRouteWithChildren
   '/_protected/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/_protected/app/': typeof ProtectedAppIndexRoute
@@ -261,12 +315,17 @@ export interface FileRoutesById {
   '/_protected/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/_protected/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/_protected/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/_protected/app/deep-learning/cnn-builder': typeof ProtectedAppDeepLearningCnnBuilderRoute
+  '/_protected/app/deep-learning/computer-vision': typeof ProtectedAppDeepLearningComputerVisionRoute
+  '/_protected/app/deep-learning/lstm-builder': typeof ProtectedAppDeepLearningLstmBuilderRoute
+  '/_protected/app/deep-learning/transformer-builder': typeof ProtectedAppDeepLearningTransformerBuilderRoute
   '/_protected/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
   '/_protected/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
   '/_protected/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
   '/_protected/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/_protected/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
   '/_protected/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
+  '/_protected/app/deep-learning/': typeof ProtectedAppDeepLearningIndexRoute
   '/_protected/app/machine-learning/': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRouteTypes {
@@ -283,6 +342,7 @@ export interface FileRouteTypes {
     | '/app/ats-resume'
     | '/app/core-tools'
     | '/app/data-science'
+    | '/app/deep-learning'
     | '/app/machine-learning'
     | '/app/prompt-builder'
     | '/app/'
@@ -291,12 +351,17 @@ export interface FileRouteTypes {
     | '/app/data-science/eda'
     | '/app/data-science/sql-generator'
     | '/app/data-science/visualization'
+    | '/app/deep-learning/cnn-builder'
+    | '/app/deep-learning/computer-vision'
+    | '/app/deep-learning/lstm-builder'
+    | '/app/deep-learning/transformer-builder'
     | '/app/machine-learning/automl'
     | '/app/machine-learning/feature-engineering'
     | '/app/machine-learning/ml-builder'
     | '/app/machine-learning/model-evaluator'
     | '/app/core-tools/'
     | '/app/data-science/'
+    | '/app/deep-learning/'
     | '/app/machine-learning/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -316,12 +381,17 @@ export interface FileRouteTypes {
     | '/app/data-science/eda'
     | '/app/data-science/sql-generator'
     | '/app/data-science/visualization'
+    | '/app/deep-learning/cnn-builder'
+    | '/app/deep-learning/computer-vision'
+    | '/app/deep-learning/lstm-builder'
+    | '/app/deep-learning/transformer-builder'
     | '/app/machine-learning/automl'
     | '/app/machine-learning/feature-engineering'
     | '/app/machine-learning/ml-builder'
     | '/app/machine-learning/model-evaluator'
     | '/app/core-tools'
     | '/app/data-science'
+    | '/app/deep-learning'
     | '/app/machine-learning'
   id:
     | '__root__'
@@ -337,6 +407,7 @@ export interface FileRouteTypes {
     | '/_protected/app/ats-resume'
     | '/_protected/app/core-tools'
     | '/_protected/app/data-science'
+    | '/_protected/app/deep-learning'
     | '/_protected/app/machine-learning'
     | '/_protected/app/prompt-builder'
     | '/_protected/app/'
@@ -345,12 +416,17 @@ export interface FileRouteTypes {
     | '/_protected/app/data-science/eda'
     | '/_protected/app/data-science/sql-generator'
     | '/_protected/app/data-science/visualization'
+    | '/_protected/app/deep-learning/cnn-builder'
+    | '/_protected/app/deep-learning/computer-vision'
+    | '/_protected/app/deep-learning/lstm-builder'
+    | '/_protected/app/deep-learning/transformer-builder'
     | '/_protected/app/machine-learning/automl'
     | '/_protected/app/machine-learning/feature-engineering'
     | '/_protected/app/machine-learning/ml-builder'
     | '/_protected/app/machine-learning/model-evaluator'
     | '/_protected/app/core-tools/'
     | '/_protected/app/data-science/'
+    | '/_protected/app/deep-learning/'
     | '/_protected/app/machine-learning/'
   fileRoutesById: FileRoutesById
 }
@@ -442,6 +518,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppMachineLearningRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/deep-learning': {
+      id: '/_protected/app/deep-learning'
+      path: '/app/deep-learning'
+      fullPath: '/app/deep-learning'
+      preLoaderRoute: typeof ProtectedAppDeepLearningRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/data-science': {
       id: '/_protected/app/data-science'
       path: '/app/data-science'
@@ -476,6 +559,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/machine-learning/'
       preLoaderRoute: typeof ProtectedAppMachineLearningIndexRouteImport
       parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
+    '/_protected/app/deep-learning/': {
+      id: '/_protected/app/deep-learning/'
+      path: '/'
+      fullPath: '/app/deep-learning/'
+      preLoaderRoute: typeof ProtectedAppDeepLearningIndexRouteImport
+      parentRoute: typeof ProtectedAppDeepLearningRoute
     }
     '/_protected/app/data-science/': {
       id: '/_protected/app/data-science/'
@@ -518,6 +608,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/machine-learning/automl'
       preLoaderRoute: typeof ProtectedAppMachineLearningAutomlRouteImport
       parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
+    '/_protected/app/deep-learning/transformer-builder': {
+      id: '/_protected/app/deep-learning/transformer-builder'
+      path: '/transformer-builder'
+      fullPath: '/app/deep-learning/transformer-builder'
+      preLoaderRoute: typeof ProtectedAppDeepLearningTransformerBuilderRouteImport
+      parentRoute: typeof ProtectedAppDeepLearningRoute
+    }
+    '/_protected/app/deep-learning/lstm-builder': {
+      id: '/_protected/app/deep-learning/lstm-builder'
+      path: '/lstm-builder'
+      fullPath: '/app/deep-learning/lstm-builder'
+      preLoaderRoute: typeof ProtectedAppDeepLearningLstmBuilderRouteImport
+      parentRoute: typeof ProtectedAppDeepLearningRoute
+    }
+    '/_protected/app/deep-learning/computer-vision': {
+      id: '/_protected/app/deep-learning/computer-vision'
+      path: '/computer-vision'
+      fullPath: '/app/deep-learning/computer-vision'
+      preLoaderRoute: typeof ProtectedAppDeepLearningComputerVisionRouteImport
+      parentRoute: typeof ProtectedAppDeepLearningRoute
+    }
+    '/_protected/app/deep-learning/cnn-builder': {
+      id: '/_protected/app/deep-learning/cnn-builder'
+      path: '/cnn-builder'
+      fullPath: '/app/deep-learning/cnn-builder'
+      preLoaderRoute: typeof ProtectedAppDeepLearningCnnBuilderRouteImport
+      parentRoute: typeof ProtectedAppDeepLearningRoute
     }
     '/_protected/app/data-science/visualization': {
       id: '/_protected/app/data-science/visualization'
@@ -597,6 +715,32 @@ const ProtectedAppDataScienceRouteWithChildren =
     ProtectedAppDataScienceRouteChildren,
   )
 
+interface ProtectedAppDeepLearningRouteChildren {
+  ProtectedAppDeepLearningCnnBuilderRoute: typeof ProtectedAppDeepLearningCnnBuilderRoute
+  ProtectedAppDeepLearningComputerVisionRoute: typeof ProtectedAppDeepLearningComputerVisionRoute
+  ProtectedAppDeepLearningLstmBuilderRoute: typeof ProtectedAppDeepLearningLstmBuilderRoute
+  ProtectedAppDeepLearningTransformerBuilderRoute: typeof ProtectedAppDeepLearningTransformerBuilderRoute
+  ProtectedAppDeepLearningIndexRoute: typeof ProtectedAppDeepLearningIndexRoute
+}
+
+const ProtectedAppDeepLearningRouteChildren: ProtectedAppDeepLearningRouteChildren =
+  {
+    ProtectedAppDeepLearningCnnBuilderRoute:
+      ProtectedAppDeepLearningCnnBuilderRoute,
+    ProtectedAppDeepLearningComputerVisionRoute:
+      ProtectedAppDeepLearningComputerVisionRoute,
+    ProtectedAppDeepLearningLstmBuilderRoute:
+      ProtectedAppDeepLearningLstmBuilderRoute,
+    ProtectedAppDeepLearningTransformerBuilderRoute:
+      ProtectedAppDeepLearningTransformerBuilderRoute,
+    ProtectedAppDeepLearningIndexRoute: ProtectedAppDeepLearningIndexRoute,
+  }
+
+const ProtectedAppDeepLearningRouteWithChildren =
+  ProtectedAppDeepLearningRoute._addFileChildren(
+    ProtectedAppDeepLearningRouteChildren,
+  )
+
 interface ProtectedAppMachineLearningRouteChildren {
   ProtectedAppMachineLearningAutomlRoute: typeof ProtectedAppMachineLearningAutomlRoute
   ProtectedAppMachineLearningFeatureEngineeringRoute: typeof ProtectedAppMachineLearningFeatureEngineeringRoute
@@ -631,6 +775,7 @@ interface ProtectedRouteChildren {
   ProtectedAppAtsResumeRoute: typeof ProtectedAppAtsResumeRoute
   ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
   ProtectedAppDataScienceRoute: typeof ProtectedAppDataScienceRouteWithChildren
+  ProtectedAppDeepLearningRoute: typeof ProtectedAppDeepLearningRouteWithChildren
   ProtectedAppMachineLearningRoute: typeof ProtectedAppMachineLearningRouteWithChildren
   ProtectedAppPromptBuilderRoute: typeof ProtectedAppPromptBuilderRoute
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
@@ -643,6 +788,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAppAtsResumeRoute: ProtectedAppAtsResumeRoute,
   ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
   ProtectedAppDataScienceRoute: ProtectedAppDataScienceRouteWithChildren,
+  ProtectedAppDeepLearningRoute: ProtectedAppDeepLearningRouteWithChildren,
   ProtectedAppMachineLearningRoute:
     ProtectedAppMachineLearningRouteWithChildren,
   ProtectedAppPromptBuilderRoute: ProtectedAppPromptBuilderRoute,
