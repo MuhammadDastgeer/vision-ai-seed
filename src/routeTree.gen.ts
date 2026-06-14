@@ -19,12 +19,18 @@ import { Route as ProtectedSettingsRouteImport } from './routes/_protected.setti
 import { Route as ProtectedProfileRouteImport } from './routes/_protected.profile'
 import { Route as ProtectedAppIndexRouteImport } from './routes/_protected.app.index'
 import { Route as ProtectedAppPromptBuilderRouteImport } from './routes/_protected.app.prompt-builder'
+import { Route as ProtectedAppMachineLearningRouteImport } from './routes/_protected.app.machine-learning'
 import { Route as ProtectedAppDataScienceRouteImport } from './routes/_protected.app.data-science'
 import { Route as ProtectedAppCoreToolsRouteImport } from './routes/_protected.app.core-tools'
 import { Route as ProtectedAppAtsResumeRouteImport } from './routes/_protected.app.ats-resume'
 import { Route as ProtectedAppModuleRouteImport } from './routes/_protected.app.$module'
+import { Route as ProtectedAppMachineLearningIndexRouteImport } from './routes/_protected.app.machine-learning.index'
 import { Route as ProtectedAppDataScienceIndexRouteImport } from './routes/_protected.app.data-science.index'
 import { Route as ProtectedAppCoreToolsIndexRouteImport } from './routes/_protected.app.core-tools.index'
+import { Route as ProtectedAppMachineLearningModelEvaluatorRouteImport } from './routes/_protected.app.machine-learning.model-evaluator'
+import { Route as ProtectedAppMachineLearningMlBuilderRouteImport } from './routes/_protected.app.machine-learning.ml-builder'
+import { Route as ProtectedAppMachineLearningFeatureEngineeringRouteImport } from './routes/_protected.app.machine-learning.feature-engineering'
+import { Route as ProtectedAppMachineLearningAutomlRouteImport } from './routes/_protected.app.machine-learning.automl'
 import { Route as ProtectedAppDataScienceVisualizationRouteImport } from './routes/_protected.app.data-science.visualization'
 import { Route as ProtectedAppDataScienceSqlGeneratorRouteImport } from './routes/_protected.app.data-science.sql-generator'
 import { Route as ProtectedAppDataScienceEdaRouteImport } from './routes/_protected.app.data-science.eda'
@@ -81,6 +87,12 @@ const ProtectedAppPromptBuilderRoute =
     path: '/app/prompt-builder',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedAppMachineLearningRoute =
+  ProtectedAppMachineLearningRouteImport.update({
+    id: '/app/machine-learning',
+    path: '/app/machine-learning',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedAppDataScienceRoute = ProtectedAppDataScienceRouteImport.update({
   id: '/app/data-science',
   path: '/app/data-science',
@@ -101,6 +113,12 @@ const ProtectedAppModuleRoute = ProtectedAppModuleRouteImport.update({
   path: '/app/$module',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedAppMachineLearningIndexRoute =
+  ProtectedAppMachineLearningIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
 const ProtectedAppDataScienceIndexRoute =
   ProtectedAppDataScienceIndexRouteImport.update({
     id: '/',
@@ -112,6 +130,30 @@ const ProtectedAppCoreToolsIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => ProtectedAppCoreToolsRoute,
+  } as any)
+const ProtectedAppMachineLearningModelEvaluatorRoute =
+  ProtectedAppMachineLearningModelEvaluatorRouteImport.update({
+    id: '/model-evaluator',
+    path: '/model-evaluator',
+    getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
+const ProtectedAppMachineLearningMlBuilderRoute =
+  ProtectedAppMachineLearningMlBuilderRouteImport.update({
+    id: '/ml-builder',
+    path: '/ml-builder',
+    getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
+const ProtectedAppMachineLearningFeatureEngineeringRoute =
+  ProtectedAppMachineLearningFeatureEngineeringRouteImport.update({
+    id: '/feature-engineering',
+    path: '/feature-engineering',
+    getParentRoute: () => ProtectedAppMachineLearningRoute,
+  } as any)
+const ProtectedAppMachineLearningAutomlRoute =
+  ProtectedAppMachineLearningAutomlRouteImport.update({
+    id: '/automl',
+    path: '/automl',
+    getParentRoute: () => ProtectedAppMachineLearningRoute,
   } as any)
 const ProtectedAppDataScienceVisualizationRoute =
   ProtectedAppDataScienceVisualizationRouteImport.update({
@@ -156,6 +198,7 @@ export interface FileRoutesByFullPath {
   '/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
+  '/app/machine-learning': typeof ProtectedAppMachineLearningRouteWithChildren
   '/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/app/': typeof ProtectedAppIndexRoute
   '/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
@@ -163,8 +206,13 @@ export interface FileRoutesByFullPath {
   '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
+  '/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
+  '/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
+  '/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
   '/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
+  '/app/machine-learning/': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -183,8 +231,13 @@ export interface FileRoutesByTo {
   '/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
+  '/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
+  '/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
+  '/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/app/core-tools': typeof ProtectedAppCoreToolsIndexRoute
   '/app/data-science': typeof ProtectedAppDataScienceIndexRoute
+  '/app/machine-learning': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -200,6 +253,7 @@ export interface FileRoutesById {
   '/_protected/app/ats-resume': typeof ProtectedAppAtsResumeRoute
   '/_protected/app/core-tools': typeof ProtectedAppCoreToolsRouteWithChildren
   '/_protected/app/data-science': typeof ProtectedAppDataScienceRouteWithChildren
+  '/_protected/app/machine-learning': typeof ProtectedAppMachineLearningRouteWithChildren
   '/_protected/app/prompt-builder': typeof ProtectedAppPromptBuilderRoute
   '/_protected/app/': typeof ProtectedAppIndexRoute
   '/_protected/app/core-tools/$tool': typeof ProtectedAppCoreToolsToolRoute
@@ -207,8 +261,13 @@ export interface FileRoutesById {
   '/_protected/app/data-science/eda': typeof ProtectedAppDataScienceEdaRoute
   '/_protected/app/data-science/sql-generator': typeof ProtectedAppDataScienceSqlGeneratorRoute
   '/_protected/app/data-science/visualization': typeof ProtectedAppDataScienceVisualizationRoute
+  '/_protected/app/machine-learning/automl': typeof ProtectedAppMachineLearningAutomlRoute
+  '/_protected/app/machine-learning/feature-engineering': typeof ProtectedAppMachineLearningFeatureEngineeringRoute
+  '/_protected/app/machine-learning/ml-builder': typeof ProtectedAppMachineLearningMlBuilderRoute
+  '/_protected/app/machine-learning/model-evaluator': typeof ProtectedAppMachineLearningModelEvaluatorRoute
   '/_protected/app/core-tools/': typeof ProtectedAppCoreToolsIndexRoute
   '/_protected/app/data-science/': typeof ProtectedAppDataScienceIndexRoute
+  '/_protected/app/machine-learning/': typeof ProtectedAppMachineLearningIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -224,6 +283,7 @@ export interface FileRouteTypes {
     | '/app/ats-resume'
     | '/app/core-tools'
     | '/app/data-science'
+    | '/app/machine-learning'
     | '/app/prompt-builder'
     | '/app/'
     | '/app/core-tools/$tool'
@@ -231,8 +291,13 @@ export interface FileRouteTypes {
     | '/app/data-science/eda'
     | '/app/data-science/sql-generator'
     | '/app/data-science/visualization'
+    | '/app/machine-learning/automl'
+    | '/app/machine-learning/feature-engineering'
+    | '/app/machine-learning/ml-builder'
+    | '/app/machine-learning/model-evaluator'
     | '/app/core-tools/'
     | '/app/data-science/'
+    | '/app/machine-learning/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -251,8 +316,13 @@ export interface FileRouteTypes {
     | '/app/data-science/eda'
     | '/app/data-science/sql-generator'
     | '/app/data-science/visualization'
+    | '/app/machine-learning/automl'
+    | '/app/machine-learning/feature-engineering'
+    | '/app/machine-learning/ml-builder'
+    | '/app/machine-learning/model-evaluator'
     | '/app/core-tools'
     | '/app/data-science'
+    | '/app/machine-learning'
   id:
     | '__root__'
     | '/'
@@ -267,6 +337,7 @@ export interface FileRouteTypes {
     | '/_protected/app/ats-resume'
     | '/_protected/app/core-tools'
     | '/_protected/app/data-science'
+    | '/_protected/app/machine-learning'
     | '/_protected/app/prompt-builder'
     | '/_protected/app/'
     | '/_protected/app/core-tools/$tool'
@@ -274,8 +345,13 @@ export interface FileRouteTypes {
     | '/_protected/app/data-science/eda'
     | '/_protected/app/data-science/sql-generator'
     | '/_protected/app/data-science/visualization'
+    | '/_protected/app/machine-learning/automl'
+    | '/_protected/app/machine-learning/feature-engineering'
+    | '/_protected/app/machine-learning/ml-builder'
+    | '/_protected/app/machine-learning/model-evaluator'
     | '/_protected/app/core-tools/'
     | '/_protected/app/data-science/'
+    | '/_protected/app/machine-learning/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -359,6 +435,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppPromptBuilderRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/machine-learning': {
+      id: '/_protected/app/machine-learning'
+      path: '/app/machine-learning'
+      fullPath: '/app/machine-learning'
+      preLoaderRoute: typeof ProtectedAppMachineLearningRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/app/data-science': {
       id: '/_protected/app/data-science'
       path: '/app/data-science'
@@ -387,6 +470,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedAppModuleRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/machine-learning/': {
+      id: '/_protected/app/machine-learning/'
+      path: '/'
+      fullPath: '/app/machine-learning/'
+      preLoaderRoute: typeof ProtectedAppMachineLearningIndexRouteImport
+      parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
     '/_protected/app/data-science/': {
       id: '/_protected/app/data-science/'
       path: '/'
@@ -400,6 +490,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/app/core-tools/'
       preLoaderRoute: typeof ProtectedAppCoreToolsIndexRouteImport
       parentRoute: typeof ProtectedAppCoreToolsRoute
+    }
+    '/_protected/app/machine-learning/model-evaluator': {
+      id: '/_protected/app/machine-learning/model-evaluator'
+      path: '/model-evaluator'
+      fullPath: '/app/machine-learning/model-evaluator'
+      preLoaderRoute: typeof ProtectedAppMachineLearningModelEvaluatorRouteImport
+      parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
+    '/_protected/app/machine-learning/ml-builder': {
+      id: '/_protected/app/machine-learning/ml-builder'
+      path: '/ml-builder'
+      fullPath: '/app/machine-learning/ml-builder'
+      preLoaderRoute: typeof ProtectedAppMachineLearningMlBuilderRouteImport
+      parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
+    '/_protected/app/machine-learning/feature-engineering': {
+      id: '/_protected/app/machine-learning/feature-engineering'
+      path: '/feature-engineering'
+      fullPath: '/app/machine-learning/feature-engineering'
+      preLoaderRoute: typeof ProtectedAppMachineLearningFeatureEngineeringRouteImport
+      parentRoute: typeof ProtectedAppMachineLearningRoute
+    }
+    '/_protected/app/machine-learning/automl': {
+      id: '/_protected/app/machine-learning/automl'
+      path: '/automl'
+      fullPath: '/app/machine-learning/automl'
+      preLoaderRoute: typeof ProtectedAppMachineLearningAutomlRouteImport
+      parentRoute: typeof ProtectedAppMachineLearningRoute
     }
     '/_protected/app/data-science/visualization': {
       id: '/_protected/app/data-science/visualization'
@@ -479,6 +597,33 @@ const ProtectedAppDataScienceRouteWithChildren =
     ProtectedAppDataScienceRouteChildren,
   )
 
+interface ProtectedAppMachineLearningRouteChildren {
+  ProtectedAppMachineLearningAutomlRoute: typeof ProtectedAppMachineLearningAutomlRoute
+  ProtectedAppMachineLearningFeatureEngineeringRoute: typeof ProtectedAppMachineLearningFeatureEngineeringRoute
+  ProtectedAppMachineLearningMlBuilderRoute: typeof ProtectedAppMachineLearningMlBuilderRoute
+  ProtectedAppMachineLearningModelEvaluatorRoute: typeof ProtectedAppMachineLearningModelEvaluatorRoute
+  ProtectedAppMachineLearningIndexRoute: typeof ProtectedAppMachineLearningIndexRoute
+}
+
+const ProtectedAppMachineLearningRouteChildren: ProtectedAppMachineLearningRouteChildren =
+  {
+    ProtectedAppMachineLearningAutomlRoute:
+      ProtectedAppMachineLearningAutomlRoute,
+    ProtectedAppMachineLearningFeatureEngineeringRoute:
+      ProtectedAppMachineLearningFeatureEngineeringRoute,
+    ProtectedAppMachineLearningMlBuilderRoute:
+      ProtectedAppMachineLearningMlBuilderRoute,
+    ProtectedAppMachineLearningModelEvaluatorRoute:
+      ProtectedAppMachineLearningModelEvaluatorRoute,
+    ProtectedAppMachineLearningIndexRoute:
+      ProtectedAppMachineLearningIndexRoute,
+  }
+
+const ProtectedAppMachineLearningRouteWithChildren =
+  ProtectedAppMachineLearningRoute._addFileChildren(
+    ProtectedAppMachineLearningRouteChildren,
+  )
+
 interface ProtectedRouteChildren {
   ProtectedProfileRoute: typeof ProtectedProfileRoute
   ProtectedSettingsRoute: typeof ProtectedSettingsRoute
@@ -486,6 +631,7 @@ interface ProtectedRouteChildren {
   ProtectedAppAtsResumeRoute: typeof ProtectedAppAtsResumeRoute
   ProtectedAppCoreToolsRoute: typeof ProtectedAppCoreToolsRouteWithChildren
   ProtectedAppDataScienceRoute: typeof ProtectedAppDataScienceRouteWithChildren
+  ProtectedAppMachineLearningRoute: typeof ProtectedAppMachineLearningRouteWithChildren
   ProtectedAppPromptBuilderRoute: typeof ProtectedAppPromptBuilderRoute
   ProtectedAppIndexRoute: typeof ProtectedAppIndexRoute
 }
@@ -497,6 +643,8 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAppAtsResumeRoute: ProtectedAppAtsResumeRoute,
   ProtectedAppCoreToolsRoute: ProtectedAppCoreToolsRouteWithChildren,
   ProtectedAppDataScienceRoute: ProtectedAppDataScienceRouteWithChildren,
+  ProtectedAppMachineLearningRoute:
+    ProtectedAppMachineLearningRouteWithChildren,
   ProtectedAppPromptBuilderRoute: ProtectedAppPromptBuilderRoute,
   ProtectedAppIndexRoute: ProtectedAppIndexRoute,
 }
@@ -516,13 +664,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
